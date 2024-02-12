@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.jakurudev.pokedex4gen"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.jakurudev.pokedex4gen"
