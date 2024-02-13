@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class PokemonStatResponse(
     @SerializedName("base_stat")
-    val baseStat: Int?,
+    val baseStat: Int,
     @SerializedName("effort")
-    val effort: Int?,
+    val effort: Int,
     @SerializedName("stat")
-    val stat: StatResponse?
+    val stat: StatResponse
 )
