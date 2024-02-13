@@ -15,7 +15,7 @@ data class PokemonResponse(
     @SerializedName("game_indices")
     val gameIndices: Any?,
     @SerializedName("height")
-    val height: Int?,
+    val heightDecimeter: Int?,
     @SerializedName("held_items")
     val heldItems: Any?,
     @SerializedName("id")
@@ -43,5 +43,5 @@ data class PokemonResponse(
     @SerializedName("types")
     val types: List<TypeResponse>?,
     @SerializedName("weight")
-    val weight: Int?
+    val weightHectogram: Int?
     )
