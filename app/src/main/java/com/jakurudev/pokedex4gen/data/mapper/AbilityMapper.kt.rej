@@ -1,4 +1,0 @@
-diff a/app/src/main/java/com/jakurudev/pokedex4gen/data/mapper/AbilityMapper.kt b/app/src/main/java/com/jakurudev/pokedex4gen/data/mapper/AbilityMapper.kt	(rejected hunks)
-@@ -0,0 +1,2 @@
-+package com.jakurudev.pokedex4gen.data.mapper
-+
