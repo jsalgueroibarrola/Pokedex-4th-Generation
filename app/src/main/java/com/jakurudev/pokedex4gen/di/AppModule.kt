@@ -36,7 +36,6 @@ object AppModule {
         return PokemonRepositoryImpl(pokemonService = service)
     }
 
-
     @Provides
     @Singleton
     fun providePokemonUseCases(repository: PokemonRepository) : PokemonUseCases {
