@@ -9,6 +9,7 @@ data class Pokemon(
     val abilities: List<Ability>,
     val weightHectogram: Int,
     val heightDecimeter: Int,
+    var isDisplay: Boolean = false
 )
 
 fun Pokemon.weightToKg(): Double {

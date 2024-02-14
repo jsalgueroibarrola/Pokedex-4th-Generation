@@ -1,16 +1,20 @@
 package com.jakurudev.pokedex4gen.presentation.main_screen.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -20,26 +24,38 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.jakurudev.pokedex4gen.presentation.main_screen.MainEvent
+import com.jakurudev.pokedex4gen.presentation.main_screen.MainState
 import com.jakurudev.pokedex4gen.ui.theme.BackgroundColorPokedex
+import com.jakurudev.pokedex4gen.ui.theme.SelectedBackgroundColorPokedex
 import com.jakurudev.pokedex4gen.ui.theme.TextColorPokedex
 
 @Composable
-fun PokemonItem(imageURL: String, name: String) {
+fun PokemonItem(
+    imageURL: String,
+    name: String,
+    isDisplay: Boolean,
+    navigationPokemon: () -> Unit,
+    displayPokemon: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(60.dp),
         contentAlignment = Alignment.Center
     ) {
-        BackgroundList(modifier = Modifier.height(60.dp))
+        BackgroundList(isDisplay = isDisplay, modifier = Modifier.height(60.dp))
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().clickable {  },
             verticalAlignment = Alignment.CenterVertically
         ) {
             PokeBall(
                 modifier = Modifier
                     .padding(start = 8.dp)
                     .size(30.dp)
+                    .clip(CircleShape)
+                    .clickable { displayPokemon() }
             )
             AsyncImage(
                 model = imageURL,
@@ -68,7 +84,7 @@ fun PokemonItem(imageURL: String, name: String) {
 }
 
 @Composable
-private fun BackgroundList(modifier: Modifier) {
+private fun BackgroundList(isDisplay: Boolean, modifier: Modifier) {
     Canvas(
         modifier = modifier
             .fillMaxWidth()
@@ -76,7 +92,7 @@ private fun BackgroundList(modifier: Modifier) {
     ) {
         val lefRadius = size.height * 0.5f
         drawCustomRoundRect(
-            color = BackgroundColorPokedex,
+            color = if(isDisplay) SelectedBackgroundColorPokedex else BackgroundColorPokedex,
             size = Size(width = size.width, height = size.height),
             topLeftRadius = CornerRadius(x = lefRadius, y = lefRadius),
             topRightRadius = CornerRadius(x = 50f, y = 50f),
