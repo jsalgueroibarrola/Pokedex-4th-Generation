@@ -1,5 +1,6 @@
 package com.jakurudev.pokedex4gen.presentation.main_screen.components
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -12,6 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -85,6 +87,10 @@ fun PokemonItem(
 
 @Composable
 private fun BackgroundList(isDisplay: Boolean, modifier: Modifier) {
+    val backgroundColor by animateColorAsState(
+        targetValue = if (isDisplay) SelectedBackgroundColorPokedex else BackgroundColorPokedex,
+        label = ""
+    )
     Canvas(
         modifier = modifier
             .fillMaxWidth()
@@ -92,7 +98,7 @@ private fun BackgroundList(isDisplay: Boolean, modifier: Modifier) {
     ) {
         val lefRadius = size.height * 0.5f
         drawCustomRoundRect(
-            color = if(isDisplay) SelectedBackgroundColorPokedex else BackgroundColorPokedex,
+            color = backgroundColor,
             size = Size(width = size.width, height = size.height),
             topLeftRadius = CornerRadius(x = lefRadius, y = lefRadius),
             topRightRadius = CornerRadius(x = 50f, y = 50f),

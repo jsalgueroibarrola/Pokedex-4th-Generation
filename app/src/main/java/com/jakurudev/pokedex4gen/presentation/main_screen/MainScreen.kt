@@ -1,6 +1,13 @@
 package com.jakurudev.pokedex4gen.presentation.main_screen
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.animation.with
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -152,7 +159,7 @@ private fun PokemonListComponent(
                         name = item.name,
                         isDisplay = item.isDisplay,
                         displayPokemon = { onEvent(MainEvent.DisplayPokemon(pokemon = item)) },
-                        navigationPokemon = {  }
+                        navigationPokemon = { }
                     )
                 }
             }
@@ -203,14 +210,23 @@ private fun SelectedPokemonComponent(
             ),
         contentAlignment = Alignment.Center
     ) {
-        if (pokemon != null) {
-            AsyncImage(
-                model = pokemon.sprites.frontDefault,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(200.dp),
-                contentScale = ContentScale.Crop
-            )
+
+        AnimatedContent(
+            targetState = pokemon,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(durationMillis = 400)) togetherWith
+                        fadeOut(animationSpec = tween(durationMillis = 400))
+            }, label = "AnimatedContent"
+        ) { currentPokemon ->
+            currentPokemon?.sprites?.frontDefault?.let { imageUrl ->
+                AsyncImage(
+                    model = imageUrl,
+                    contentDescription = null,
+                    modifier = Modifier.size(200.dp),
+                    contentScale = ContentScale.Crop
+                )
+            }
         }
+
     }
 }
