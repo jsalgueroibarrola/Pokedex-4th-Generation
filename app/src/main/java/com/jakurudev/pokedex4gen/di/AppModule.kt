@@ -3,6 +3,7 @@ package com.jakurudev.pokedex4gen.di
 import com.jakurudev.pokedex4gen.data.PokemonService
 import com.jakurudev.pokedex4gen.data.repository_impl.PokemonRepositoryImpl
 import com.jakurudev.pokedex4gen.domain.repository.PokemonRepository
+import com.jakurudev.pokedex4gen.domain.use_case.GetOnePokemonUseCase
 import com.jakurudev.pokedex4gen.domain.use_case.GetPokemonsUseCase
 import com.jakurudev.pokedex4gen.domain.use_case.PokemonUseCases
 import dagger.Module
@@ -41,6 +42,7 @@ object AppModule {
     fun providePokemonUseCases(repository: PokemonRepository) : PokemonUseCases {
         return PokemonUseCases(
             getPokemons = GetPokemonsUseCase(repository = repository),
+            getOnePokemonUseCase = GetOnePokemonUseCase(repository = repository)
         )
     }
 }

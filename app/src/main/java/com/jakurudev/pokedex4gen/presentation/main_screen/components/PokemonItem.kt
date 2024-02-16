@@ -49,7 +49,7 @@ fun PokemonItem(
     ) {
         BackgroundList(isDisplay = isDisplay, modifier = Modifier.height(60.dp))
         Row(
-            modifier = Modifier.fillMaxWidth().clickable {  },
+            modifier = Modifier.fillMaxWidth().clickable { navigationPokemon() },
             verticalAlignment = Alignment.CenterVertically
         ) {
             PokeBall(

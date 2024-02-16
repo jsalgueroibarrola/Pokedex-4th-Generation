@@ -41,7 +41,7 @@ data class PokemonResponse(
     @SerializedName("stats")
     val stats: List<PokemonStatResponse>,
     @SerializedName("types")
-    val types: List<TypeResponse>,
+    val types: List<PokemonTypeResponse>,
     @SerializedName("weight")
     val weightHectogram: Int
     )

@@ -8,7 +8,7 @@ fun PokemonResponse.toPokemon() : Pokemon {
         id = id,
         name = name,
         sprites = sprites.toSprites(),
-        types = types.map { it.name },
+        types = types.map { it.type!!.name },
         stats = stats.map { it.toStat() },
         abilities = abilities.map { it.toAbility() },
         weightHectogram = weightHectogram,

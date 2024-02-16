@@ -29,7 +29,7 @@ class PokemonPagingSource(
             coroutineScope {
                 (position until (position + params.loadSize).coerceAtMost(491)).map { id ->
                     async(Dispatchers.IO) {
-                        val response = pokemonService.getPokemon(id = id)
+                        val response = pokemonService.getPokemon(id = id.toLong())
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 it.toPokemon()?.let { pokemon -> list.add(pokemon) }

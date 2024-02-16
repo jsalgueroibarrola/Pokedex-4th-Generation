@@ -2,12 +2,10 @@ package com.jakurudev.pokedex4gen.presentation.main_screen
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.animation.with
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -45,6 +43,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import com.jakurudev.pokedex4gen.domain.model.Pokemon
+import com.jakurudev.pokedex4gen.navigation.AppScreens
 import com.jakurudev.pokedex4gen.presentation.main_screen.components.PokemonItem
 import com.jakurudev.pokedex4gen.ui.theme.Background
 import com.jakurudev.pokedex4gen.ui.theme.BorderColorImage
@@ -75,7 +74,8 @@ fun MainScreen(
             lazyPokemonItems = lazyPokemonItems,
             state = state,
             onEvent = onEvent,
-            modifier = Modifier.padding(it)
+            modifier = Modifier.padding(it),
+            navController = navController
         )
     }
 
@@ -87,6 +87,7 @@ private fun Content(
     state: State<MainState>,
     onEvent: (MainEvent) -> Unit,
     modifier: Modifier,
+    navController: NavHostController,
 ) {
     val context = LocalContext.current
 
@@ -120,6 +121,7 @@ private fun Content(
                 lazyPokemonItems = lazyPokemonItems,
                 state = state,
                 onEvent = onEvent,
+                navController = navController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -134,6 +136,7 @@ private fun PokemonListComponent(
     state: State<MainState>,
     onEvent: (MainEvent) -> Unit,
     modifier: Modifier,
+    navController: NavHostController,
 ) {
     val listState = rememberLazyListState()
 
@@ -152,14 +155,14 @@ private fun PokemonListComponent(
                 count = lazyPokemonItems.itemCount,
                 key = lazyPokemonItems.itemKey { it.id },
             ) { index ->
-                val item = lazyPokemonItems[index]
-                item?.let {
+                val pokemon = lazyPokemonItems[index]
+                pokemon?.let {
                     PokemonItem(
-                        imageURL = item.sprites.frontDefault,
-                        name = item.name,
-                        isDisplay = item.isDisplay,
-                        displayPokemon = { onEvent(MainEvent.DisplayPokemon(pokemon = item)) },
-                        navigationPokemon = { }
+                        imageURL = pokemon.sprites.frontDefault,
+                        name = pokemon.name,
+                        isDisplay = pokemon.isDisplay,
+                        displayPokemon = { onEvent(MainEvent.DisplayPokemon(pokemon = pokemon)) },
+                        navigationPokemon = { navController.navigate(AppScreens.PokemonScreen.route + "/" + pokemon.id) }
                     )
                 }
             }

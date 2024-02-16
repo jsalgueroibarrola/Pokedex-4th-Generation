@@ -16,11 +16,11 @@ data class Sprites(
             list.add(frontShiny)
             list.add(backShiny)
         }
-        else if (type == Type.SHINY_FEMALE && !frontFemale.isNullOrBlank()){
+        else if (type == Type.SHINY_FEMALE && !frontShinyFemale.isNullOrBlank() && !backShinyFemale.isNullOrBlank()){
             list.add(frontShinyFemale!!)
             list.add(backShinyFemale!!)
         }
-        else if (type == Type.FEMALE && !frontShinyFemale.isNullOrBlank()){
+        else if (type == Type.FEMALE && !frontFemale.isNullOrBlank() && !backFemale.isNullOrBlank()){
             list.add(frontFemale!!)
             list.add(backFemale!!)
         }

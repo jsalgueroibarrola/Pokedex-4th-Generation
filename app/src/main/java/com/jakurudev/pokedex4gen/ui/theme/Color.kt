@@ -71,4 +71,8 @@ val DarkChipText = Color(0xFF705545)
 val IceChipBackground = Color(0xFFe6f9fe)
 val IceChipText = Color(0xFF059ac7)
 
+val FairyChipBackground = Color(0xFFfee7fe)
+val FairyChipText = Color(0xFFf40bf4)
+
 val TabColor = Color(0xFF406df2)
+val ChartColor = Color(0xFF7091f5)

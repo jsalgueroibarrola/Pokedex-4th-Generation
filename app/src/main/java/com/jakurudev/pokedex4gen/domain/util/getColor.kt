@@ -8,6 +8,8 @@ import com.jakurudev.pokedex4gen.ui.theme.DragonChipBackground
 import com.jakurudev.pokedex4gen.ui.theme.DragonChipText
 import com.jakurudev.pokedex4gen.ui.theme.ElectricChipBackground
 import com.jakurudev.pokedex4gen.ui.theme.ElectricChipText
+import com.jakurudev.pokedex4gen.ui.theme.FairyChipBackground
+import com.jakurudev.pokedex4gen.ui.theme.FairyChipText
 import com.jakurudev.pokedex4gen.ui.theme.FightingChipBackground
 import com.jakurudev.pokedex4gen.ui.theme.FightingChipText
 import com.jakurudev.pokedex4gen.ui.theme.FireChipBackground
@@ -54,6 +56,7 @@ fun getChipTextColor(type: String) : Color {
     colors["psychic"] = PsychicChipText
     colors["dark"] = DarkChipText
     colors["ice"] = IceChipText
+    colors["fairy"] = FairyChipText
     // fairy
 
     return colors[type]!!
@@ -78,6 +81,7 @@ fun getChipBackgroundColor(type: String) : Color {
     colors["psychic"] = PsychicChipBackground
     colors["dark"] = DarkChipBackground
     colors["ice"] = IceChipBackground
+    colors["fairy"] = FairyChipBackground
     // fairy
 
     return colors[type]!!

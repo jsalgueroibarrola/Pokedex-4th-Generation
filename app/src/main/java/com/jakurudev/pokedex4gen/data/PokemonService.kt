@@ -9,6 +9,6 @@ interface PokemonService {
 
     @GET("pokemon/{id}")
     suspend fun getPokemon(
-        @Path("id") id: Int
+        @Path("id") id: Long
     ) : Response<PokemonResponse>
 }
