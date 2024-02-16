@@ -10,25 +10,29 @@ data class Sprites(
     val frontShiny: String,
     val frontShinyFemale: String?,
 ) {
-    fun getSprite(gender: Gender, view: View, isShiny: Boolean): String? {
-        return when (view) {
-            View.FRONT -> when (gender) {
-                Gender.MALE -> if (isShiny) frontShiny else frontDefault
-                Gender.FEMALE -> if (isShiny) frontShinyFemale else frontFemale ?: frontDefault
-            }
-
-            View.BACK -> when (gender) {
-                Gender.MALE -> if (isShiny) backShiny else backDefault
-                Gender.FEMALE -> if (isShiny) backShinyFemale else backFemale ?: backDefault
-            }
+    fun getSprites(type: Type): List<String> {
+        val list = mutableListOf<String>()
+        if(type == Type.SHINY_MALE){
+            list.add(frontShiny)
+            list.add(backShiny)
         }
+        else if (type == Type.SHINY_FEMALE && !frontFemale.isNullOrBlank()){
+            list.add(frontShinyFemale!!)
+            list.add(backShinyFemale!!)
+        }
+        else if (type == Type.FEMALE && !frontShinyFemale.isNullOrBlank()){
+            list.add(frontFemale!!)
+            list.add(backFemale!!)
+        }
+        else if (type == Type.MALE){
+            list.add(frontDefault)
+            list.add(backDefault)
+        }
+
+        return list
     }
 
-    enum class Gender {
-        MALE, FEMALE
-    }
-
-    enum class View {
-        FRONT, BACK
+    enum class Type {
+        SHINY_FEMALE, SHINY_MALE, MALE, FEMALE
     }
 }

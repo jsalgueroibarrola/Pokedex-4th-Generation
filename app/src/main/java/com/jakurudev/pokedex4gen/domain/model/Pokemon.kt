@@ -24,10 +24,19 @@ fun Pokemon.weightToOunces(): Double {
     return weightHectogram * 3.5274
 }
 
-fun Pokemon.heightToDecimeter(): Double {
+fun Pokemon.heightToMeter(): Double {
     return heightDecimeter.toDouble() / 10
 }
 
 fun Pokemon.heightToFeet(): Double {
     return heightDecimeter * 0.328084
+}
+
+fun Pokemon.idToString() : String {
+    val idStr = id.toString()
+    var result = "#"
+    for (i in 1..(3-idStr.length)){
+        result += 0
+    }
+    return result + idStr
 }
