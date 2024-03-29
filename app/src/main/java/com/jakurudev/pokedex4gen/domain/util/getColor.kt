@@ -2,6 +2,7 @@ package com.jakurudev.pokedex4gen.domain.util
 
 import androidx.compose.ui.graphics.Color
 import com.jakurudev.pokedex4gen.ui.theme.BugChipBackground
+import com.jakurudev.pokedex4gen.ui.theme.BugChipText
 import com.jakurudev.pokedex4gen.ui.theme.DarkChipBackground
 import com.jakurudev.pokedex4gen.ui.theme.DarkChipText
 import com.jakurudev.pokedex4gen.ui.theme.DragonChipBackground
@@ -43,7 +44,7 @@ fun getChipTextColor(type: String) : Color {
     colors["fire"] = FireChipText
     colors["water"] = WaterChipText
     colors["steel"] = SteelChipText
-    colors["bug"] = FireChipText
+    colors["bug"] = BugChipText
     colors["dragon"] = DragonChipText
     colors["electric"] = ElectricChipText
     colors["normal"] = NormalChipText
@@ -57,7 +58,6 @@ fun getChipTextColor(type: String) : Color {
     colors["dark"] = DarkChipText
     colors["ice"] = IceChipText
     colors["fairy"] = FairyChipText
-    // fairy
 
     return colors[type]!!
 }
@@ -82,7 +82,6 @@ fun getChipBackgroundColor(type: String) : Color {
     colors["dark"] = DarkChipBackground
     colors["ice"] = IceChipBackground
     colors["fairy"] = FairyChipBackground
-    // fairy
 
     return colors[type]!!
 }
