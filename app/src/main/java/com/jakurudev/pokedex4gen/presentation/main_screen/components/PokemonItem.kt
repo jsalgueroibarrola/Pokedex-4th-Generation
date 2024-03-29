@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,8 +25,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.jakurudev.pokedex4gen.presentation.main_screen.MainEvent
-import com.jakurudev.pokedex4gen.presentation.main_screen.MainState
 import com.jakurudev.pokedex4gen.ui.theme.BackgroundColorPokedex
 import com.jakurudev.pokedex4gen.ui.theme.SelectedBackgroundColorPokedex
 import com.jakurudev.pokedex4gen.ui.theme.TextColorPokedex
@@ -40,6 +37,7 @@ fun PokemonItem(
     navigationPokemon: () -> Unit,
     displayPokemon: () -> Unit,
     modifier: Modifier = Modifier,
+    id: String,
 ) {
     Box(
         modifier = modifier
@@ -68,7 +66,7 @@ fun PokemonItem(
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = "N. 001",
+                text = "N. $id",
                 fontSize = 22.sp,
                 color = TextColorPokedex,
                 modifier = Modifier.padding(start = 24.dp)

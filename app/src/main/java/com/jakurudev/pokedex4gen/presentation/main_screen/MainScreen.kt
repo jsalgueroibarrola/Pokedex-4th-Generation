@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -42,7 +43,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
+import com.jakurudev.pokedex4gen.R
 import com.jakurudev.pokedex4gen.domain.model.Pokemon
+import com.jakurudev.pokedex4gen.domain.model.idToString
 import com.jakurudev.pokedex4gen.navigation.AppScreens
 import com.jakurudev.pokedex4gen.presentation.main_screen.components.PokemonItem
 import com.jakurudev.pokedex4gen.ui.theme.Background
@@ -61,7 +64,7 @@ fun MainScreen(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "Pokédex de Sinnoh",
+                    text = stringResource(R.string.pokedex_de_sinnoh),
                     fontSize = 24.sp,
                     color = Color.White
                 )
@@ -160,6 +163,7 @@ private fun PokemonListComponent(
                     PokemonItem(
                         imageURL = pokemon.sprites.frontDefault,
                         name = pokemon.name,
+                        id = pokemon.idToString(),
                         isDisplay = pokemon.isDisplay,
                         displayPokemon = { onEvent(MainEvent.DisplayPokemon(pokemon = pokemon)) },
                         navigationPokemon = { navController.navigate(AppScreens.PokemonScreen.route + "/" + pokemon.id) }

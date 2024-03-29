@@ -42,11 +42,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.jakurudev.pokedex4gen.R
 import com.jakurudev.pokedex4gen.domain.model.Ability
 import com.jakurudev.pokedex4gen.domain.model.Pokemon
 import com.jakurudev.pokedex4gen.domain.model.Sprites
@@ -81,11 +83,13 @@ fun PokemonScreen(
 
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = TopBar),
-                navigationIcon = {IconButton(onClick = {
-                    navController.popBackStack()
-                }, colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)) {
-                    Icon(Icons.Filled.ArrowBack, contentDescription = "Back" )
-                }}
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }, colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
             )
         }) {
             content(it, state.value.pokemon!!)
@@ -100,7 +104,11 @@ private fun content(
     modifier: Modifier = Modifier
 ) {
     var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabTitles = listOf("Info", "Stats", "Sprites")
+    val tabTitles = listOf(stringResource(R.string.info), stringResource(R.string.stats),
+        stringResource(
+            R.string.sprites
+        )
+    )
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -188,9 +196,9 @@ fun SpritesTabContent(pokemon: Pokemon, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BarGraph(stats: List<Stat>) {
+fun BarGraph(stats: List<Stat>, modifier: Modifier = Modifier) {
     val maxValue = stats.maxOfOrNull { it.baseStat } ?: 1
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = modifier.padding(16.dp)) {
         stats.forEach { stat ->
             Row(
                 modifier = Modifier
@@ -201,10 +209,12 @@ fun BarGraph(stats: List<Stat>) {
                     text = stat.name,
                     modifier = Modifier.width(120.dp)
                 )
-                Canvas(modifier = Modifier
-                    .height(10.dp)
-                    .weight(1f)
-                    .padding(horizontal = 8.dp)) {
+                Canvas(
+                    modifier = Modifier
+                        .height(10.dp)
+                        .weight(1f)
+                        .padding(horizontal = 8.dp)
+                ) {
                     val barWidth = size.width * (stat.baseStat.toFloat() / maxValue)
                     drawLine(
                         color = ChartColor,

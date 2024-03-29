@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pokedex4Gen</string>
+    <string name="pokedex_de_sinnoh">Pokédex de Sinnoh</string>
+    <string name="info">Info</string>
+    <string name="stats">Stats</string>
+    <string name="sprites">Sprites</string>
 </resources>
