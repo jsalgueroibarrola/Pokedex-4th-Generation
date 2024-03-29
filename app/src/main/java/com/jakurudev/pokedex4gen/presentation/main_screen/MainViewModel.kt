@@ -14,12 +14,12 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val pokemonUseCases: PokemonUseCases
 ) : ViewModel() {
-    val pokemonFlow = pokemonUseCases.getPokemons().cachedIn(viewModelScope)
+    val pokemonFlow = pokemonUseCases.getPokemonsUseCase().cachedIn(viewModelScope)
     private val _state = MutableStateFlow(MainState())
     val state = _state.asStateFlow()
 
-    fun onEvent(event: MainEvent){
-        when(event) {
+    fun onEvent(event: MainEvent) {
+        when (event) {
             is MainEvent.DisplayPokemon -> {
                 _state.update {
                     it.copy(

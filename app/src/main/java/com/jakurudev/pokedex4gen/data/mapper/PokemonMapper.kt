@@ -3,7 +3,7 @@ package com.jakurudev.pokedex4gen.data.mapper
 import com.jakurudev.pokedex4gen.data.response.PokemonResponse
 import com.jakurudev.pokedex4gen.domain.model.Pokemon
 
-fun PokemonResponse.toPokemon() : Pokemon {
+fun PokemonResponse.toPokemon(): Pokemon {
     return Pokemon(
         id = id,
         name = name,
@@ -15,5 +15,3 @@ fun PokemonResponse.toPokemon() : Pokemon {
         heightDecimeter = heightDecimeter
     )
 }
-
-// fun Pokemon.toPokemonResponse() : PokemonResponse {}

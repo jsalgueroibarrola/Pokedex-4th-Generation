@@ -14,25 +14,27 @@ class PokemonPagingSource(
     private val pokemonService: PokemonService
 ) : PagingSource<Int, Pokemon>() {
 
+    companion object {
+        const val NUMBER_FIRST_POKEMON = 387
+        const val NUMBER_LAST_POKEMON = 490
+    }
+
     override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {
-        return state.anchorPosition?.let { position ->
-            val anchorPage = state.closestPageToPosition(position)
-            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
-        }
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         return try {
-            val position = params.key ?: 387
+            val position = params.key ?: NUMBER_FIRST_POKEMON
 
             val list = mutableListOf<Pokemon>()
             coroutineScope {
-                (position until (position + params.loadSize).coerceAtMost(491)).map { id ->
+                (position until (position + params.loadSize).coerceAtMost(NUMBER_LAST_POKEMON + 1)).map { id ->
                     async(Dispatchers.IO) {
                         val response = pokemonService.getPokemon(id = id.toLong())
                         if (response.isSuccessful) {
                             response.body()?.let {
-                                it.toPokemon()?.let { pokemon -> list.add(pokemon) }
+                                it.toPokemon().let { pokemon -> list.add(pokemon) }
                             }
                         }
                     }
@@ -43,8 +45,8 @@ class PokemonPagingSource(
 
             LoadResult.Page(
                 data = list,
-                prevKey = if (position == 387) null else position - params.loadSize,
-                nextKey = if (list.isEmpty() || position + params.loadSize >= 490) null else position + params.loadSize
+                prevKey = if (position == NUMBER_FIRST_POKEMON) null else position - params.loadSize,
+                nextKey = if (list.isEmpty() || position + params.loadSize >= NUMBER_LAST_POKEMON) null else position + params.loadSize
             )
         } catch (exception: Exception) {
             LoadResult.Error(exception)

@@ -41,7 +41,7 @@ object AppModule {
     @Singleton
     fun providePokemonUseCases(repository: PokemonRepository) : PokemonUseCases {
         return PokemonUseCases(
-            getPokemons = GetPokemonsUseCase(repository = repository),
+            getPokemonsUseCase = GetPokemonsUseCase(repository = repository),
             getOnePokemonUseCase = GetOnePokemonUseCase(repository = repository)
         )
     }

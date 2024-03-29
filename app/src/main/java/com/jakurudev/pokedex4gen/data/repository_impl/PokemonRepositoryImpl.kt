@@ -10,12 +10,11 @@ import com.jakurudev.pokedex4gen.domain.model.ApiResponse
 import com.jakurudev.pokedex4gen.domain.model.Pokemon
 import com.jakurudev.pokedex4gen.domain.repository.PokemonRepository
 import kotlinx.coroutines.flow.Flow
-import kotlin.Exception
 
 class PokemonRepositoryImpl(private val pokemonService: PokemonService) : PokemonRepository {
     override fun getPokemonStream(pageSize: Int, prefetchDistance: Int): Flow<PagingData<Pokemon>> {
         return Pager(
-            config = PagingConfig(pageSize = 8, prefetchDistance = 6),
+            config = PagingConfig(pageSize = 24, prefetchDistance = 6),
             pagingSourceFactory = {
                 PokemonPagingSource(pokemonService = pokemonService)
             }
@@ -33,7 +32,7 @@ class PokemonRepositoryImpl(private val pokemonService: PokemonService) : Pokemo
             }
             throw Exception("Pokemon Not Found")
         } catch (e: Exception) {
-            return ApiResponse.Error(e)
+            return ApiResponse.Error(exception = e)
         }
     }
 }

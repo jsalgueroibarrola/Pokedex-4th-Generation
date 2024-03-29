@@ -38,7 +38,7 @@ import com.jakurudev.pokedex4gen.ui.theme.SteelChipText
 import com.jakurudev.pokedex4gen.ui.theme.WaterChipBackground
 import com.jakurudev.pokedex4gen.ui.theme.WaterChipText
 
-fun getChipTextColor(type: String) : Color {
+fun getChipTextColor(type: String): Color {
     val colors = mutableMapOf<String, Color>()
     colors["flying"] = FlyChipText
     colors["fire"] = FireChipText
@@ -62,7 +62,7 @@ fun getChipTextColor(type: String) : Color {
     return colors[type]!!
 }
 
-fun getChipBackgroundColor(type: String) : Color {
+fun getChipBackgroundColor(type: String): Color {
     val colors = mutableMapOf<String, Color>()
     colors["flying"] = FlyChipBackground
     colors["fire"] = FireChipBackground

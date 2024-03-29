@@ -1,7 +1,6 @@
 package com.jakurudev.pokedex4gen.presentation.pokemon_screen
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,6 +33,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -43,22 +43,18 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.jakurudev.pokedex4gen.R
-import com.jakurudev.pokedex4gen.domain.model.Ability
 import com.jakurudev.pokedex4gen.domain.model.Pokemon
 import com.jakurudev.pokedex4gen.domain.model.Sprites
 import com.jakurudev.pokedex4gen.domain.model.Stat
 import com.jakurudev.pokedex4gen.presentation.pokemon_screen.components.InfoTabContent
 import com.jakurudev.pokedex4gen.ui.theme.ChartColor
-import com.jakurudev.pokedex4gen.ui.theme.Pokedex4GenTheme
 import com.jakurudev.pokedex4gen.ui.theme.TabColor
 import com.jakurudev.pokedex4gen.ui.theme.TopBar
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,8 +99,9 @@ private fun content(
     pokemon: Pokemon,
     modifier: Modifier = Modifier
 ) {
-    var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabTitles = listOf(stringResource(R.string.info), stringResource(R.string.stats),
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    val tabTitles = listOf(
+        stringResource(R.string.info), stringResource(R.string.stats),
         stringResource(
             R.string.sprites
         )
@@ -150,12 +147,6 @@ private fun content(
     }
 }
 
-
-@Composable
-fun StatsTabContent(pokemon: Pokemon) {
-    BarGraph(stats = pokemon.stats)
-}
-
 @Composable
 fun SpritesTabContent(pokemon: Pokemon, modifier: Modifier = Modifier) {
     val sprites = mutableMapOf<Sprites.Type, List<String>>()
@@ -193,6 +184,11 @@ fun SpritesTabContent(pokemon: Pokemon, modifier: Modifier = Modifier) {
             }
         }
     }
+}
+
+@Composable
+fun StatsTabContent(pokemon: Pokemon) {
+    BarGraph(stats = pokemon.stats)
 }
 
 @Composable

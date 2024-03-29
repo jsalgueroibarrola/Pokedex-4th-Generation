@@ -31,11 +31,16 @@ fun AppNavigation() {
             )
         }
         composable(route = AppScreens.PokemonScreen.route + "/{id}",
-            arguments = listOf(navArgument("id") { type = NavType.StringType })) {
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) {
             val id = it.arguments?.getString("id")
             val viewModel = hiltViewModel<PokemonViewModel>()
             viewModel.onEvent(PokemonEvent.GetPokemon(id!!.toLong()))
-            PokemonScreen(state = viewModel.state.collectAsState(), onEvent = viewModel::onEvent, navController = navController)
+            PokemonScreen(
+                state = viewModel.state.collectAsState(),
+                onEvent = viewModel::onEvent,
+                navController = navController
+            )
         }
     }
 }

@@ -76,7 +76,10 @@ fun PokeBall(modifier: Modifier) {
 @Preview
 @Composable
 fun preview() {
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp)) {
         PokeBall(modifier = Modifier)
     }
 }

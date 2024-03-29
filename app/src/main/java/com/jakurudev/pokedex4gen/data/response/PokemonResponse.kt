@@ -1,6 +1,5 @@
 package com.jakurudev.pokedex4gen.data.response
 
-import androidx.compose.ui.text.font.FontWeight
 import com.google.gson.annotations.SerializedName
 
 data class PokemonResponse(
@@ -44,4 +43,4 @@ data class PokemonResponse(
     val types: List<PokemonTypeResponse>,
     @SerializedName("weight")
     val weightHectogram: Int
-    )
+)

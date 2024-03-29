@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GetPokemonsUseCase(private val repository: PokemonRepository) {
 
-     operator fun invoke(pageSize: Int = 8, prefetchDistance: Int = 6): Flow<PagingData<Pokemon>> {
-         return repository.getPokemonStream(pageSize = pageSize, prefetchDistance = prefetchDistance)
-     }
+    operator fun invoke(pageSize: Int = 8, prefetchDistance: Int = 6): Flow<PagingData<Pokemon>> {
+        return repository.getPokemonStream(pageSize = pageSize, prefetchDistance = prefetchDistance)
+    }
 }
